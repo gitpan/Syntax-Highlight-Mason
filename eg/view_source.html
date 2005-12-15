@@ -1,0 +1,27 @@
+<%doc>
+  Usage:  <& view_source.html &>
+  When called, will display the highlighted source of
+  the calling component.
+  required: none
+</%doc>
+% unless (defined $caller) {
+<a href="view_source.html?caller=<% $m->request_comp->path %>">View Source</a>
+% }
+<%init>
+if (defined $caller) {
+  my $comp = $m->fetch_comp($caller);
+  my $file = $comp->source_file($comp);
+  local $/ = undef;
+  open(my $io,$file) or die "$! at $file";
+  my $source = <$io>;
+  close($io);
+  my $compiler = Syntax::Highlight::Mason->new();
+  $m->print($compiler->compile($source));
+}
+</%init>
+<%args>
+$caller => undef
+</%args>
+<%once>
+use Syntax::Highlight::Mason;
+</%once>
