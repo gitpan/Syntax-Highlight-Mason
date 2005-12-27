@@ -42,7 +42,7 @@ should do the trick.
 =cut
 
 use strict;
-our $VERSION = '1.0';
+our $VERSION = '1.1';
 
 use HTML::Mason::Lexer;
 use HTML::Mason::Exceptions (abbr => [qw(syntax_error)]);
@@ -50,7 +50,8 @@ use HTML::Mason::Compiler;
 use HTML::Entities ();
 use Syntax::Highlight::HTML;
 use Syntax::Highlight::Perl::Improved ':FULL';
-use Params::Validate;
+use Class::Container;
+use Params::Validate qw(:all);
 use base qw(HTML::Mason::Compiler);
 
 our $debug = 0;
@@ -142,6 +143,17 @@ mason code.
 
 =cut
 
+my %spec;
+foreach (qw(preamble postamble color_table)) {
+  $spec{$_} = {type => SCALAR, parse => 'string', optional => 1};
+}
+foreach (qw(perl html plain mason)) {
+  $spec{$_} = {type => CODEREF, parse => 'code', optional => 1};
+}
+
+__PACKAGE__->valid_params(%spec);
+undef %spec;
+
 sub initialize {
   my $self = shift;
   my $perl_formatter = Syntax::Highlight::Perl::Improved->new();
@@ -164,7 +176,7 @@ sub initialize {
 		       color_table => {default => $color_table},
 		       perl => {default => $actions->{perl}},
 		       html => {default => $actions->{html}},
-		       plain => {default => $actions->{plain}},
+ 		       plain => {default => $actions->{plain}},
 		       mason => {default => $actions->{mason}}
 		      });
   $perl_formatter->define_substitution('<' => '&lt;', 
@@ -342,8 +354,6 @@ sub variable_declaration {
   $text .= ' => ' . $p{default} if defined $p{default};
   $self->highlight('plain', $text ,"\n");
 }
-
-
 
 1;
 
