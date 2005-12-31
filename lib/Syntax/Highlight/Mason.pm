@@ -42,7 +42,7 @@ should do the trick.
 =cut
 
 use strict;
-our $VERSION = '1.1';
+our $VERSION = '1.2';
 
 use HTML::Mason::Lexer;
 use HTML::Mason::Exceptions (abbr => [qw(syntax_error)]);
@@ -157,12 +157,12 @@ undef %spec;
 sub initialize {
   my $self = shift;
   my $perl_formatter = Syntax::Highlight::Perl::Improved->new();
-  my $html_formatter = Syntax::Highlight::HTML->new();
+  my $html_formatter = Syntax::Highlight::HTML->new(pre => 0);
+  $html_formatter->xml_mode(1);
   my $actions = 
     {
      perl => sub { return $perl_formatter->format_string(@_)},
      html => sub { my $t = $html_formatter->parse(@_);
-		   $t =~ s{</?pre>\n?}{}gis;
 		   return $t
 		 },
      plain => sub {return HTML::Entities::encode(join('',@_))},

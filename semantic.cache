@@ -1,0 +1,25 @@
+;; Object Syntax-Highlight-Mason-1.00/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "Syntax-Highlight-Mason-1.00/"
+  :tables (list 
+   (semanticdb-table "README"
+    :major-mode 'html-mode
+    :tags 'nil
+    :file "README"
+    :pointmax 1219
+    )
+   (semanticdb-table "MANIFEST"
+    :major-mode 'html-mode
+    :tags 'nil
+    :file "MANIFEST"
+    )
+   (semanticdb-table "Changes"
+    :major-mode 'html-mode
+    :tags 'nil
+    :file "Changes"
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre3"
+  :semanticdb-version "2.0pre3"
+  )

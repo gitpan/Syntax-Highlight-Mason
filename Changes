@@ -1,5 +1,9 @@
 Revision history for Perl extension Syntax::Highlight::Mason.
 
+1.2   Fri Dec 30 20:30:44 2005
+        - added xml_mode to HTML::Parse so that comments inside
+          of <script> .. </script> tags work properly.
+          fixed tests so that they work correctly.
 1.1   Tue Dec 27 05:52:44 2005
         - Added validate_params to keep Class::Container happy
         - Changed eg/view_source to allow inline display
