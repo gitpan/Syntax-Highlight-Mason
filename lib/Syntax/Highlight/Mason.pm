@@ -42,7 +42,7 @@ should do the trick.
 =cut
 
 use strict;
-our $VERSION = '1.2';
+our $VERSION = '1.21';
 
 use HTML::Mason::Lexer;
 use HTML::Mason::Exceptions (abbr => [qw(syntax_error)]);
@@ -132,7 +132,7 @@ our @mason_highlight = ( '<span class="m-tag">', '</span>' );
 =head3 Further Customization
 
 More customization can be done by passing parmeters to the
-C<new() method if desired. You can set the B<preamble>,
+C<new()> method if desired. You can set the B<preamble>,
 B<postamble>, and B<color_table> parameters here too.  In
 addition, you can specify your own callback subroutines which
 encode B<perl>, B<html>, B<plain> (text), and B<mason> code.
