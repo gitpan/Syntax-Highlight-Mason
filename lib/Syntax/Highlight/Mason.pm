@@ -42,7 +42,7 @@ should do the trick.
 =cut
 
 use strict;
-our $VERSION = '1.21';
+our $VERSION = '1.23';
 
 use HTML::Mason::Lexer;
 use HTML::Mason::Exceptions (abbr => [qw(syntax_error)]);
